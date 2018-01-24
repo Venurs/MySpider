@@ -85,3 +85,24 @@ def tagTableAdd(model):
     return isSuccess
 
 
+def groupIdTableAdd(model):
+    sql_insert = 'INSERT INTO groupidtable VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+    result = selectSQL("SELECT * FROM groupidtable where GROUPID ='%s' and PATH ='%s' %(model.groupid,model.path)")
+    if result != None and len(result) > 0:
+        return False
+    param = list()
+    param.append(model.groupid)
+    param.append(model.headerimagepath)
+    param.append(model.photodes)
+    param.append(model.createtime)
+    param.append(model.size)
+    param.append(model.path)
+    param.append(model.saveimagepath)
+    param.append(model.userid)
+    param.append(model.status)
+    params = tuple(param)
+    isSuccess = executeSQL(sql=sql_insert, param=params)
+    return isSuccess
+
+
+
